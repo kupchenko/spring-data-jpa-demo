@@ -31,8 +31,8 @@ public class AppConfig {
     @Bean
     @Profile("prod")
     public DataSource productDataSource() {
-
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
         dataSource.setUrl(env.getProperty("product.jdbc.url"));
         dataSource.setUsername(env.getProperty("jdbc.user"));
         dataSource.setPassword(env.getProperty("jdbc.pass"));
@@ -56,12 +56,13 @@ public class AppConfig {
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager txManager = new JpaTransactionManager();
+
         txManager.setEntityManagerFactory(entityManagerFactory);
+
         return txManager;
     }
 
     @Bean
-    @Profile("prod")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
@@ -70,12 +71,12 @@ public class AppConfig {
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         entityManagerFactoryBean.setPackagesToScan("me.kupchenko");
-        entityManagerFactoryBean.setJpaProperties(jpaHibernateProperties());
+        entityManagerFactoryBean.setJpaProperties(hibernateProperties());
 
         return entityManagerFactoryBean;
     }
 
-    private Properties jpaHibernateProperties() {
+    private Properties hibernateProperties() {
         Properties properties = new Properties();
 
         properties.put(PROPERTY_NAME_HIBERNATE_DIALECT, "org.hibernate.dialect.MySQL8Dialect");
