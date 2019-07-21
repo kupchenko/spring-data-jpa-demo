@@ -11,8 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import java.util.HashSet;
@@ -22,7 +21,9 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@NamedQuery(name = "findAllUsersWithName", query = "FROM User c WHERE c.name LIKE :custName")
+@NamedQueries({
+        @NamedQuery(name = "User.findByNameLike", query = "FROM User c WHERE c.name LIKE :custName")
+})
 public class User {
     @Id
     @Column(name = "idUser")

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UsersDto getAllUsers() {
-        List<UserDto> userDtos = StreamSupport.stream(userRepository.findAll().spliterator(), false)
+        List<UserDto> userDtos = userRepository.findAll().stream()
                 .map(userMapper::userToUserDto)
                 .collect(Collectors.toList());
         return new UsersDto(userDtos);

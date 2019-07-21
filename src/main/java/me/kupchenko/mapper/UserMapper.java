@@ -14,8 +14,6 @@ import java.util.Set;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
-
     UserDto userToUserDto(User user);
 
     @Mapping(ignore = true, target = "id")
@@ -24,15 +22,15 @@ public interface UserMapper {
     @Mapping(ignore = true, target = "id")
     User userDtoToUser(RequestUserDto userDto);
 
-    Set<String> rolesListToStringList(List<Role> roles);
+    Set<String> rolesSetToStringsSet(List<Role> roles);
 
-    Set<Role> stringsListToRolesList(List<String> roleString);
+    Set<Role> stringsSetToRolesSet(List<String> strings);
 
-    default String dtoToString(Role role) {
+    default String roleToString(Role role) {
         return role.getName();
     }
 
-    default Role dtoToString(String roleString) {
+    default Role stringToRole(String roleString) {
         Role role = new Role();
         role.setName(roleString);
         return role;
