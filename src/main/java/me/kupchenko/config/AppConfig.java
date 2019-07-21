@@ -64,6 +64,7 @@ public class AppConfig {
     }
 
     @Bean
+    @Profile("prod")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
