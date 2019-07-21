@@ -1,0 +1,41 @@
+package me.kupchenko.service;
+
+import lombok.RequiredArgsConstructor;
+import me.kupchenko.dao.RoleRepository;
+import me.kupchenko.dao.UserRepository;
+import me.kupchenko.dto.RequestUserDto;
+import me.kupchenko.dto.UserDto;
+import me.kupchenko.dto.UsersDto;
+import me.kupchenko.exception.NoRoleFoundException;
+import me.kupchenko.mapper.UserMapper;
+import me.kupchenko.model.Role;
+import me.kupchenko.model.User;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserMapper userMapper;
+
+    @Override
+    public UsersDto getAllUsers() {
+        List<UserDto> userDtos = StreamSupport.stream(userRepository.findAll().spliterator(), false)
+                .map(userMapper::userToUserDto)
+                .collect(Collectors.toList());
+        return new UsersDto(userDtos);
+    }
+
+    @Override
+    public void saveUser(RequestUserDto userDto) {
+        User user = userMapper.userDtoToUser(userDto);
+        Role role = roleRepository.findByNameIgnoreCase("USER").orElseThrow(NoRoleFoundException::new);
+        user.getRoles().add(role);
+        userRepository.save(user);
+    }
+}
