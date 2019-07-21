@@ -2,8 +2,9 @@ DROP TABLE roles IF EXISTS;
 
 CREATE TABLE roles
 (
-    idRole integer identity primary key,
-    name   varchar(50) not null
+    idRole integer identity,
+    name   varchar(50) not null,
+    PRIMARY KEY (idRole)
 );
 
 DROP TABLE users IF EXISTS;

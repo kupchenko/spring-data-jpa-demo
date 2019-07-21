@@ -1,0 +1,16 @@
+#spring.datasource.jdbcUrl = [url]
+#spring.datasource.username = [username]
+#spring.datasource.password = [password]
+
+#spring.second-datasource.jdbcUrl = [url]
+#spring.second-datasource.username = [username]
+#spring.second-datasource.password = [password]
+
+product:
+  jdbc:
+    url: jdbc:mysql://localhost:3306/user_roles_db?serverTimezone=UTC
+
+jdbc:
+  driverClassName: com.mysql.cj.jdbc.Driver
+  user: root
+  pass: rootroot
