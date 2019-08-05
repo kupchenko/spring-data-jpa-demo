@@ -5,6 +5,9 @@
 #spring.second-datasource.jdbcUrl = [url]
 #spring.second-datasource.username = [username]
 #spring.second-datasource.password = [password]
+spring:
+  profiles:
+    active: inmemorysec
 
 product:
   jdbc:

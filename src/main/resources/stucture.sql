@@ -13,6 +13,7 @@ CREATE TABLE users
 (
     idUser    integer identity primary key,
     username  varchar(50) not null,
+    password  varchar(256) not null,
     firstName varchar(50) not null,
     lastName  varchar(50) not null
 );

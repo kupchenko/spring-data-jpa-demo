@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,9 +22,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@NamedQueries({
-        @NamedQuery(name = "User.findByNameLike", query = "FROM User c WHERE c.name LIKE :custName")
-})
 public class User {
     @Id
     @Column(name = "idUser")
@@ -35,7 +33,9 @@ public class User {
     private String firstName;
     @Column
     private String lastName;
-    @ManyToMany
+    @Column
+    private String password;
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_has_roles",
             joinColumns = @JoinColumn(name = "user"),

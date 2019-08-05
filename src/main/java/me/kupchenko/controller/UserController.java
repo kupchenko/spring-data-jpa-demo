@@ -1,33 +1,30 @@
 package me.kupchenko.controller;
 
 import lombok.RequiredArgsConstructor;
-import me.kupchenko.dto.RequestUserDto;
-import me.kupchenko.dto.UsersDto;
+import lombok.extern.slf4j.Slf4j;
 import me.kupchenko.service.UserService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+import java.security.Principal;
+
+@Slf4j
+@Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public UsersDto getUsers() {
-        return userService.getAllUsers();
+    public String userPage(Principal principal) {
+        log.info("You've been logged in with username {}", principal.getName());
+        return "user";
     }
 
-    @PostMapping("/stub")
-    public void saveUsersStub() {
-        userService.saveUser(new RequestUserDto("dmitrii.kupchenko", "Dmitrii", "Kupchenko"));
-    }
-
-    @PostMapping
-    public void saveUsers(@RequestBody RequestUserDto requestUserDto) {
-        userService.saveUser(requestUserDto);
+    @PostMapping("/login/success")
+    public String successForwardUrl() {
+        return "redirect:/user";
     }
 }
