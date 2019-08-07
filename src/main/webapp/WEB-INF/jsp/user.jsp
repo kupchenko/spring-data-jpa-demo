@@ -4,6 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-    User home page!
+User home page!
 </body>
 </html>

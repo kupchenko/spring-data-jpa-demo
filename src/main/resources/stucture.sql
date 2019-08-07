@@ -12,10 +12,10 @@ DROP TABLE users IF EXISTS;
 CREATE TABLE users
 (
     idUser    integer identity primary key,
-    username  varchar(50) not null,
+    username  varchar(50)  not null,
     password  varchar(256) not null,
-    firstName varchar(50) not null,
-    lastName  varchar(50) not null
+    firstName varchar(50)  not null,
+    lastName  varchar(50)  not null
 );
 
 DROP TABLE user_has_roles IF EXISTS;
