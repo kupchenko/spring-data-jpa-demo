@@ -10,8 +10,6 @@ import me.kupchenko.exception.NoRoleFoundException;
 import me.kupchenko.mapper.UserMapper;
 import me.kupchenko.model.Role;
 import me.kupchenko.model.User;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+    private static final String ROLE_USER = "ROLE_USER";
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final UserMapper userMapper;
@@ -38,7 +37,7 @@ public class UserServiceImpl implements UserService {
     public void saveUser(RequestUserDto userDto) {
         User user = userMapper.userDtoToUser(userDto);
         user.setPassword(cryptPasswordEncoder.encode(userDto.getPassword()));
-        Role role = roleRepository.findByNameIgnoreCase("ROLE_USER").orElseThrow(NoRoleFoundException::new);
+        Role role = roleRepository.findByNameIgnoreCase(ROLE_USER).orElseThrow(NoRoleFoundException::new);
         user.getRoles().add(role);
         userRepository.save(user);
     }
