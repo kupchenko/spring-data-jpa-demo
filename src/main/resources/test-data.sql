@@ -1,5 +1,6 @@
 INSERT INTO users(idUser, username, firstName, lastName, password)
-VALUES (0, 'admin', 'Dmitrii', 'Kupchenko', '$2a$16$C.xPFLoR39hnIAUvCYquM.xQ.1B.RQsznASDLCmS3mquXaA5/Ydcm');
+VALUES (0, 'admin', 'Dmitrii', 'Kupchenko', '$2a$16$ZsgP6l22BWZ8vZqUCqE1Pe6f3ntGhCxxd8s/maLcAOgJSdKVUglS2');
+-- Username: admin, Password: admin
 
 INSERT INTO roles (name)
 VALUES ('ROLE_USER');
